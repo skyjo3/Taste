@@ -53,11 +53,6 @@
 			path = TasteTests;
 			sourceTree = "<group>";
 		};
-		E19C39482CD4372E00E37EB4 /* TasteUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = TasteUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +85,6 @@
 			children = (
 				E19C39272CD4372800E37EB4 /* Taste */,
 				E19C393E2CD4372E00E37EB4 /* TasteTests */,
-				E19C39482CD4372E00E37EB4 /* TasteUITests */,
 				E19C39262CD4372800E37EB4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -165,9 +159,6 @@
 			);
 			dependencies = (
 				E19C39472CD4372E00E37EB4 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				E19C39482CD4372E00E37EB4 /* TasteUITests */,
 			);
 			name = TasteUITests;
 			packageProductDependencies = (

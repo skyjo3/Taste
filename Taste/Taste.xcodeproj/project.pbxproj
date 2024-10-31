@@ -14,19 +14,11 @@
 			remoteGlobalIDString = E19C39242CD4372800E37EB4;
 			remoteInfo = Taste;
 		};
-		E19C39462CD4372E00E37EB4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E19C391D2CD4372800E37EB4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E19C39242CD4372800E37EB4;
-			remoteInfo = Taste;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E19C39252CD4372800E37EB4 /* Taste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taste.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E19C393B2CD4372E00E37EB4 /* TasteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TasteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E19C39452CD4372E00E37EB4 /* TasteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TasteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -34,6 +26,15 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+			);
+			target = E19C39242CD4372800E37EB4 /* Taste */;
+		};
+		E1C1CF292CD44EF9009741C2 /* Exceptions for "TasteTests" folder in "Taste" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				data/empty.json,
+				data/malformed.json,
+				data/valid.json,
 			);
 			target = E19C39242CD4372800E37EB4 /* Taste */;
 		};
@@ -50,6 +51,9 @@
 		};
 		E19C393E2CD4372E00E37EB4 /* TasteTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E1C1CF292CD44EF9009741C2 /* Exceptions for "TasteTests" folder in "Taste" target */,
+			);
 			path = TasteTests;
 			sourceTree = "<group>";
 		};
@@ -64,13 +68,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E19C39382CD4372E00E37EB4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E19C39422CD4372E00E37EB4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -94,7 +91,6 @@
 			children = (
 				E19C39252CD4372800E37EB4 /* Taste.app */,
 				E19C393B2CD4372E00E37EB4 /* TasteTests.xctest */,
-				E19C39452CD4372E00E37EB4 /* TasteUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,26 +143,6 @@
 			productReference = E19C393B2CD4372E00E37EB4 /* TasteTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E19C39442CD4372E00E37EB4 /* TasteUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E19C39562CD4372E00E37EB4 /* Build configuration list for PBXNativeTarget "TasteUITests" */;
-			buildPhases = (
-				E19C39412CD4372E00E37EB4 /* Sources */,
-				E19C39422CD4372E00E37EB4 /* Frameworks */,
-				E19C39432CD4372E00E37EB4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E19C39472CD4372E00E37EB4 /* PBXTargetDependency */,
-			);
-			name = TasteUITests;
-			packageProductDependencies = (
-			);
-			productName = TasteUITests;
-			productReference = E19C39452CD4372E00E37EB4 /* TasteUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,10 +157,6 @@
 						CreatedOnToolsVersion = 16.0;
 					};
 					E19C393A2CD4372E00E37EB4 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = E19C39242CD4372800E37EB4;
-					};
-					E19C39442CD4372E00E37EB4 = {
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = E19C39242CD4372800E37EB4;
 					};
@@ -206,7 +178,6 @@
 			targets = (
 				E19C39242CD4372800E37EB4 /* Taste */,
 				E19C393A2CD4372E00E37EB4 /* TasteTests */,
-				E19C39442CD4372E00E37EB4 /* TasteUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -220,13 +191,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E19C39392CD4372E00E37EB4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E19C39432CD4372E00E37EB4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -250,13 +214,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E19C39412CD4372E00E37EB4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -264,11 +221,6 @@
 			isa = PBXTargetDependency;
 			target = E19C39242CD4372800E37EB4 /* Taste */;
 			targetProxy = E19C393C2CD4372E00E37EB4 /* PBXContainerItemProxy */;
-		};
-		E19C39472CD4372E00E37EB4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E19C39242CD4372800E37EB4 /* Taste */;
-			targetProxy = E19C39462CD4372E00E37EB4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -494,40 +446,6 @@
 			};
 			name = Release;
 		};
-		E19C39572CD4372E00E37EB4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W4B7N88B72;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.amychen.TasteUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Taste;
-			};
-			name = Debug;
-		};
-		E19C39582CD4372E00E37EB4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W4B7N88B72;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.amychen.TasteUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Taste;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -554,15 +472,6 @@
 			buildConfigurations = (
 				E19C39542CD4372E00E37EB4 /* Debug */,
 				E19C39552CD4372E00E37EB4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E19C39562CD4372E00E37EB4 /* Build configuration list for PBXNativeTarget "TasteUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E19C39572CD4372E00E37EB4 /* Debug */,
-				E19C39582CD4372E00E37EB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

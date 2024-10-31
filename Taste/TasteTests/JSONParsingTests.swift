@@ -23,7 +23,9 @@ final class JSONParsingTests: XCTestCase {
     }
     
     func testParseJSON_Valid() {
-        
+        self.measure {
+            guard let url = 
+        }
     }
     
     func testParseJSON_Empty() {

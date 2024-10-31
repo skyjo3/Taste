@@ -26,6 +26,6 @@ struct RecipeManager {
     }
     
     func parseJSON(_ recipeData: Data) -> [RecipeModel] {
-        
+        return []
     }
 }

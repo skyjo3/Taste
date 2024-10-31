@@ -8,6 +8,8 @@
 import UIKit
 
 class ListViewController: UIViewController {
+    
+    var recipeManager = RecipeManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()

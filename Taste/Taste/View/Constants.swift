@@ -37,6 +37,9 @@ let cellButtonHeight = 50.0
 
 let cellIconImageWidth = 20.0
 
-let cellTextXPosition = 100.0
 let cellTextWidth = screenWidth
 let cellCornerRadius = 20.0
+
+// collection header
+let headerWidth = cellWidth
+let headerHeight = 40.0

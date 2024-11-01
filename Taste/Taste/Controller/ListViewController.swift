@@ -12,6 +12,9 @@ class ListViewController: UIViewController {
     var recipeManager = RecipeManager()
     
     var recipes: [RecipeModel] = []
+    lazy var groupedRecipes : [String:[RecipeModel]] = [:]
+    lazy var cuisineTypes: [String] = []
+    
     var collectionView: UICollectionView!
     var emptyView: EmptyListView!
     
@@ -44,9 +47,11 @@ class ListViewController: UIViewController {
         // collection view
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        layout.headerReferenceSize = CGSize(width: headerWidth, height: headerHeight)
         layout.minimumLineSpacing = collectionMinLineSpacing
         layout.minimumInteritemSpacing = collectionMinInteritemSpacing
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collectionView.register(CuisineHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CuisineHeaderView.reuseIdentifier)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -67,9 +72,13 @@ class ListViewController: UIViewController {
         recipeManager.fetchRecipes_local("empty")
     }
     @objc func sortButtonTapped() {
-        recipes.sort { $0.name < $1.name }
+        // group by cuisine, and sort sections by A-Z
+        groupedRecipes = Dictionary(grouping: recipes, by: { $0.cuisine })
+        cuisineTypes = groupedRecipes.keys.sorted()
+        
         collectionView.reloadData()
-        let alert = ErrorAlertController(title: "Sorted", message: "The recipes are sorted by name in A-Z order now.", preferredStyle: .alert)
+        
+        let alert = ErrorAlertController(title: "Sorted", message: "The recipes are now grouped by cuisine. Sections are sorted by name in A-Z order.", preferredStyle: .alert)
         self.present(alert, animated: true)
     }
     @objc func refreshButtonTapped() {
@@ -82,6 +91,8 @@ extension ListViewController: RecipeManagerDelegate {
     
     func didUpdateRecipes(_ recipeManager: RecipeManager, recipes: [RecipeModel]) {
         self.recipes = recipes
+        groupedRecipes = [:]
+        cuisineTypes = []
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -113,15 +124,50 @@ extension ListViewController: RecipeManagerDelegate {
 
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return cuisineTypes.isEmpty ? 1 : cuisineTypes.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return recipes.count
+        if cuisineTypes.isEmpty {
+            return recipes.count
+        }
+        let cuisine = cuisineTypes[section]
+        return groupedRecipes[cuisine]?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier, for: indexPath) as! CollectionViewCell
         
-        cell.configure(with: recipes[indexPath.item])
+        if cuisineTypes.isEmpty {
+            cell.configure(with: recipes[indexPath.item])
+        } else {
+            let cuisine = cuisineTypes[indexPath.section]
+            if let specificCuisineRecipes = groupedRecipes[cuisine] {
+                cell.configure(with: specificCuisineRecipes[indexPath.item])
+            }
+        }
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+            if kind == UICollectionView.elementKindSectionHeader {
+                let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CuisineHeaderView.reuseIdentifier, for: indexPath) as! CuisineHeaderView
+                
+                if !cuisineTypes.isEmpty {
+                    let cuisine = cuisineTypes[indexPath.section]
+                    header.textLabel.text = cuisine
+                } else {
+                    header.textLabel.text = "Header"
+                }
+                return header
+                
+            } else if kind == UICollectionView.elementKindSectionFooter {
+                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath)
+                return footer
+            }
+        return UICollectionReusableView()
+        }
 }

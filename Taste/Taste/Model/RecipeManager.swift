@@ -9,7 +9,7 @@ import Foundation
 
 protocol RecipeManagerDelegate {
     func didUpdateRecipes(_ recipeManager: RecipeManager, recipes: [RecipeModel])
-    func didFailWithError(_ error: Error)
+    func didFailWithError(error: Error)
 }
 
 struct RecipeManager {
@@ -86,7 +86,7 @@ extension RecipeManager {
         do {
             let data = try Data(contentsOf: url)
             let results = parseJSON(data)
-            delegate?.didUpdateRecipes(self, employees: results)
+            delegate?.didUpdateRecipes(self, recipes: results)
         } catch {
             delegate?.didFailWithError(error: error)
         }

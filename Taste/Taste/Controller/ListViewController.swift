@@ -54,17 +54,17 @@ class ListViewController: UIViewController {
         view.addSubview(collectionView)
         
         // load recipes
-//        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
-        recipeManager.fetchEmployees_local("valid")
+//        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
+        recipeManager.fetchRecipes_local("valid")
     }
     
     @objc func malformedButtonTapped() {
-//        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-malformed.json")
-        recipeManager.fetchEmployees_local("malformed")
+//        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-malformed.json")
+        recipeManager.fetchRecipes_local("malformed")
     }
     @objc func emptyButtonTapped() {
-//        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-empty.json")
-        recipeManager.fetchEmployees_local("empty")
+//        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-empty.json")
+        recipeManager.fetchRecipes_local("empty")
     }
     @objc func sortButtonTapped() {
         recipes.sort { $0.name < $1.name }
@@ -73,8 +73,8 @@ class ListViewController: UIViewController {
         self.present(alert, animated: true)
     }
     @objc func refreshButtonTapped() {
-//        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
-        recipeManager.fetchEmployees_local("valid")
+//        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
+        recipeManager.fetchRecipes_local("valid")
     }
 }
 
@@ -83,7 +83,7 @@ extension ListViewController: RecipeManagerDelegate {
     func didUpdateRecipes(_ recipeManager: RecipeManager, recipes: [RecipeModel]) {
         self.recipes = recipes
         
-        Dispatch.main.async {
+        DispatchQueue.main.async {
             self.collectionView.reloadData()
             
             if recipes.count == 0 {
@@ -100,7 +100,7 @@ extension ListViewController: RecipeManagerDelegate {
         }
     }
     
-    func didFailWithError(error: error) {
+    func didFailWithError(error: Error) {
         print(error)
         DispatchQueue.main.async {
             self.emptyView.isHidden = false

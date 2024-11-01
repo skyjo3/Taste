@@ -10,43 +10,43 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "customCell"
     
-    public let imageView: UIImageView!
-    public let titleLabel: UILabel!
-    public let subtitleLabel: UILabel!
-    public let videoButton: UIButton!
-    public let sourceButton: UIButton!
+    public var imageView: UIImageView!
+    public var titleLabel: UILabel!
+    public var subtitleLabel: UILabel!
+    public var videoButton: UIButton!
+    public var sourceButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width*2/3))
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width*2/3))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = cellImageWidth/2
+        imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
-        view.addSubview(imageView)
+        self.addSubview(imageView)
         
-        titleLabel = UILabel(frame: CGRect(x: 0, y: 50, width: view.frame.width, height: 20))
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 50, width: self.frame.width, height: 20))
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        view.addSubview(titleLabel)
+        self.addSubview(titleLabel)
         
-        subtitleLabel = UILabel(frame: CGRect(x: 0, y: 70, width: view.frame.width, height: 20))
+        subtitleLabel = UILabel(frame: CGRect(x: 0, y: 70, width: self.frame.width, height: 20))
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        view.addSubview(subtitleLabel)
+        self.addSubview(subtitleLabel)
         
-        videoButton = UIButton(frame: CGRect(x: 0, y: 90, width: view.frame.width/2, height: 40))
-        videoButton.buttonType = .system
+        videoButton = UIButton(type: .system)
+        videoButton.frame = CGRect(x: 0, y: 90, width: self.frame.width/2, height: 40)
         videoButton.titleLabel?.text = "Video"
         videoButton.addTarget(self, action: #selector(videoButtonTapped), for: .touchUpInside)
-        view?.addSubview(videoButton)
+        self.addSubview(videoButton)
         
-        sourceButton = UIButton(frame: CGRect(x: 0, y: 90, width: view.frame.width/2, height: 40))
-        sourceButton.buttonType = .system
+        sourceButton = UIButton(type: .system)
+        sourceButton.frame = CGRect(x: 0, y: 90, width: self.frame.width/2, height: 40)
         sourceButton.titleLabel?.text = "Source"
         videoButton.addTarget(self, action: #selector(sourceButtonTapped), for: .touchUpInside)
-        view?.addSubview(sourceButton)
+        self.addSubview(sourceButton)
     }
     
     required init?(coder: NSCoder) {
@@ -57,15 +57,15 @@ class CollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage(named: "") // changed later
         titleLabel.text = recipe.name
         subtitleLabel.text = recipe.cuisine
-        videoButton.description = recipe.videoURL
-        sourceButton.description = recipe.sourceURL
+        videoButton.userActivity?.webpageURL = URL(string: recipe.videoURL)
+        sourceButton.userActivity?.webpageURL = URL(string: recipe.sourceURL)
     }
     
     @objc func videoButtonTapped(sender: UIButton) {
-        print(sender.description)
+        print(sender.userActivity?.webpageURL)
     }
     
     @objc func sourceButtonTapped(sender: UIButton) {
-        print(sender.description)
+        print(sender.userActivity?.webpageURL)
     }
 }

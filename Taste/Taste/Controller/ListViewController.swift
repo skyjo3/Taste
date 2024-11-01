@@ -43,7 +43,7 @@ class ListViewController: UIViewController {
         
         // collection view
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.width, height: collectionCellHeight)
+        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
         layout.minimumLineSpacing = collectionMinLineSpacing
         layout.minimumInteritemSpacing = collectionMinInteritemSpacing
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)

@@ -10,41 +10,54 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "customCell"
     
+    private var containerView: UIView!
+    
     public var imageView: UIImageView!
     public var titleLabel: UILabel!
     public var subtitleLabel: UILabel!
-    public var videoButton: UIButton!
-    public var sourceButton: UIButton!
+    public var videoButton: URLButton!
+    public var sourceButton: URLButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: cellImageHeight))
+        layer.cornerRadius = cellCornerRadius
+        clipsToBounds = true
+        
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cellWidth, height: cellImageHeight))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         self.addSubview(imageView)
         
-        titleLabel = UILabel(frame: CGRect(x: 0, y: cellImageHeight, width: screenWidth, height: cellTitleHeight))
+        titleLabel = UILabel(frame: CGRect(x: 0, y: cellImageHeight+cellPadding*1, width: cellWidth, height: cellTitleHeight))
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.textAlignment = .center
         self.addSubview(titleLabel)
         
-        subtitleLabel = UILabel(frame: CGRect(x: 0, y: cellImageHeight+cellTitleHeight, width: screenWidth, height: cellSubtitleHeight))
+        subtitleLabel = UILabel(frame: CGRect(x: 0, y: cellImageHeight+cellTitleHeight+cellPadding*1, width: cellWidth, height: cellSubtitleHeight))
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        subtitleLabel.textAlignment = .center
         self.addSubview(subtitleLabel)
         
-        videoButton = UIButton(frame: CGRect(x: 0, y: cellImageHeight+cellTitleHeight+cellSubtitleHeight, width: screenWidth/2, height: cellButtonHeight))
-        videoButton.setTitle("Video", for: .normal)
-        videoButton.tintColor = .black
-        videoButton.backgroundColor = .blue
+        videoButton = URLButton(frame: CGRect(x: 0, y: cellImageHeight+cellTitleHeight+cellSubtitleHeight+cellPadding*2, width: cellWidth/2, height: cellButtonHeight))
+        videoButton.setTitle("🎬 Video", for: .normal)
+        videoButton.setTitleColor(.black, for: .normal)
+        videoButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        videoButton.layer.borderColor = UIColor.white.cgColor
+        videoButton.layer.borderWidth = 0.5
+        videoButton.backgroundColor = UIColor(red: 0.9, green: 0.7, blue: 0.7, alpha: 1.0)
         videoButton.addTarget(self, action: #selector(videoButtonTapped), for: .touchUpInside)
         self.addSubview(videoButton)
         
-        sourceButton = UIButton(frame: CGRect(x: screenWidth/2, y: cellImageHeight+cellTitleHeight+cellSubtitleHeight, width: screenWidth/2, height: cellButtonHeight))
-        sourceButton.setTitle("Source", for: .normal)
-        sourceButton.tintColor = .black
-        sourceButton.backgroundColor = .green
+        sourceButton = URLButton(frame: CGRect(x: cellWidth/2, y: cellImageHeight+cellTitleHeight+cellSubtitleHeight+cellPadding*2, width: cellWidth/2, height: cellButtonHeight))
+        sourceButton.setTitle("🌐 Source", for: .normal)
+        sourceButton.setTitleColor(.black, for: .normal)
+        sourceButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        sourceButton.layer.borderColor = UIColor.white.cgColor
+        sourceButton.layer.borderWidth = 0.5
+        sourceButton.backgroundColor = UIColor(red: 0.9, green: 0.7, blue: 0.7, alpha: 1.0)
         sourceButton.addTarget(self, action: #selector(sourceButtonTapped), for: .touchUpInside)
         self.addSubview(sourceButton)
     }
@@ -62,18 +75,22 @@ class CollectionViewCell: UICollectionViewCell {
             imageView.image = UIImage(systemName: "circle") // changed later
         }
         if let videoURL = recipe.videoURL {
-            videoButton.userActivity?.webpageURL = URL(string: videoURL)
+            videoButton.url = URL(string: videoURL)
         }
         if let sourceURL = recipe.sourceURL {
-            sourceButton.userActivity?.webpageURL = URL(string: sourceURL)
+            sourceButton.url = URL(string: sourceURL)
         }
     }
     
-    @objc func videoButtonTapped(sender: UIButton) {
-        print(sender.userActivity?.webpageURL)
+    @objc func videoButtonTapped(sender: URLButton) {
+        print(sender.url)
     }
     
-    @objc func sourceButtonTapped(sender: UIButton) {
-        print(sender.userActivity?.webpageURL)
+    @objc func sourceButtonTapped(sender: URLButton) {
+        print(sender.url)
     }
+}
+
+class URLButton: UIButton {
+    var url: URL?
 }

@@ -54,11 +54,19 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with recipe: RecipeModel) {
-        imageView.image = UIImage(named: "") // changed later
+        
         titleLabel.text = recipe.name
         subtitleLabel.text = recipe.cuisine
-        videoButton.userActivity?.webpageURL = URL(string: recipe.videoURL)
-        sourceButton.userActivity?.webpageURL = URL(string: recipe.sourceURL)
+        
+        if let imageURL = recipe.imageURL {
+            imageView.image = UIImage(named: "") // changed later
+        }
+        if let videoURL = recipe.videoURL {
+            videoButton.userActivity?.webpageURL = URL(string: videoURL)
+        }
+        if let sourceURL = recipe.sourceURL {
+            sourceButton.userActivity?.webpageURL = URL(string: sourceURL)
+        }
     }
     
     @objc func videoButtonTapped(sender: UIButton) {

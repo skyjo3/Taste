@@ -110,3 +110,18 @@ extension ListViewController: RecipeManagerDelegate {
         }
     }
 }
+
+extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return recipes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier, for: indexPath) as! CollectionViewCell
+        
+        cell.configure(with: recipes[indexPath.item])
+        
+        return cell
+    }
+}

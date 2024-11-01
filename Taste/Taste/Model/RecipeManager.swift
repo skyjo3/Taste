@@ -45,8 +45,33 @@ struct RecipeManager {
     
     func parseJSON(_ recipeData: Data) -> [RecipeModel] {
         
-        
-        
-        return []
+        let decoder = JSONDecoder()
+        do {
+            let decodedData = try decoder.decode(RecipeData.self, from: recipeData)
+            let array = decodedData.recipes
+            
+            if array.count == 0 {
+                let error = NSError(domain: "", code: 100, userInfo: [NSLocalizedDescriptionKey: "The returned recipe list is empty."])
+                delegate?.didFailWithError(error: error)
+                return []
+            }
+            
+            var recipes : [RecipeModel] = []
+            
+            for i in 0..<array.count {
+                let recipe = RecipeModel(name: array[i].name,
+                                         cuisine: array[i].cuisine,
+                                         imageURL: array[i].photo_url_small,
+                                         videoURL: array[i].youtube_url,
+                                         sourceURL: array[i].source_url)
+                recipes.append(recipe)
+            }
+            
+            return recipes
+            
+        } catch {
+            delegate?.didFailWithError(error: error)
+            return []
+        }
     }
 }

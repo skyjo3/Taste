@@ -159,8 +159,10 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 if !cuisineTypes.isEmpty {
                     let cuisine = cuisineTypes[indexPath.section]
                     header.textLabel.text = cuisine
+                    header.backgroundColor = UIColor(red: 0.8, green: 0.5, blue: 0.5, alpha: 1.0)
                 } else {
-                    header.textLabel.text = "Header"
+                    header.textLabel.text = ""
+                    header.backgroundColor = .clear
                 }
                 return header
                 

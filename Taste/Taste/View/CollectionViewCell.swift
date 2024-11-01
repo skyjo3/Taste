@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "customCell"
@@ -72,7 +73,8 @@ class CollectionViewCell: UICollectionViewCell {
         subtitleLabel.text = recipe.cuisine
         
         if let imageURL = recipe.imageURL {
-            imageView.image = UIImage(systemName: "circle") // changed later
+            imageView.sd_setImage(with: URL(string: imageURL),
+                                  placeholderImage: UIImage(named: "placeholder-image"))
         }
         if let videoURL = recipe.videoURL {
             videoButton.url = URL(string: videoURL)

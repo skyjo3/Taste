@@ -61,7 +61,7 @@ struct RecipeManager {
             for i in 0..<array.count {
                 let recipe = RecipeModel(name: array[i].name,
                                          cuisine: array[i].cuisine,
-                                         imageURL: array[i].photo_url_small,
+                                         imageURL: array[i].photo_url_large,
                                          videoURL: array[i].youtube_url,
                                          sourceURL: array[i].source_url)
                 recipes.append(recipe)

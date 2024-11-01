@@ -15,8 +15,6 @@ class CuisineHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor(red: 0.8, green: 0.5, blue: 0.5, alpha: 1.0)
-        
         textLabel = UILabel(frame: frame)
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.textAlignment = .center

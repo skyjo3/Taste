@@ -59,17 +59,17 @@ class ListViewController: UIViewController {
         view.addSubview(collectionView)
         
         // load recipes
-//        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
-        recipeManager.fetchRecipes_local("valid")
+        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
+//        recipeManager.fetchRecipes_local("valid")
     }
     
     @objc func malformedButtonTapped() {
-//        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-malformed.json")
-        recipeManager.fetchRecipes_local("malformed")
+        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-malformed.json")
+//        recipeManager.fetchRecipes_local("malformed")
     }
     @objc func emptyButtonTapped() {
-//        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-empty.json")
-        recipeManager.fetchRecipes_local("empty")
+        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-empty.json")
+//        recipeManager.fetchRecipes_local("empty")
     }
     @objc func sortButtonTapped() {
         
@@ -89,8 +89,8 @@ class ListViewController: UIViewController {
         self.present(alert, animated: true)
     }
     @objc func refreshButtonTapped() {
-//        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
-        recipeManager.fetchRecipes_local("valid")
+        recipeManager.fetchRecipes(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
+//        recipeManager.fetchRecipes_local("valid")
     }
 }
 

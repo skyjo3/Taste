@@ -76,7 +76,37 @@ class ListViewController: UIViewController {
 //        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
         recipeManager.fetchEmployees_local("valid")
     }
-
-
 }
 
+extension ListViewController: RecipeManagerDelegate {
+    
+    func didUpdateRecipes(_ recipeManager: RecipeManager, recipes: [RecipeModel]) {
+        self.recipes = recipes
+        
+        Dispatch.main.async {
+            self.collectionView.reloadData()
+            
+            if recipes.count == 0 {
+                self.emptyView.isHidden = false
+            } else {
+                self.emptyView.isHidden = true
+                
+                if !self.isFirstLoaded {
+                    let alert = ErrorAlertController(title: "Refreshed", message: "The updated list of recipes is loaded now.", preferredStyle: .alert)
+                    self.present(alert, animated: true)
+                }
+                self.isFirstLoaded = false
+            }
+        }
+    }
+    
+    func didFailWithError(error: error) {
+        print(error)
+        DispatchQueue.main.async {
+            self.emptyView.isHidden = false
+            
+            let alert = ErrorAlertController(title: "Alert", message: error.localizedDescription, preferredStyle: .alert)
+            self.present(alert, animated: true)
+        }
+    }
+}

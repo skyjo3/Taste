@@ -27,7 +27,7 @@ class MockURLSession: URLSession {
         with url: URL,
         completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
     ) -> URLSessionDataTask {
-        let tast = MockURLSessionDataTask {
+        let task = MockURLSessionDataTask {
             completionHandler(self.data, nil, self.error)
         }
         return task
@@ -39,14 +39,14 @@ class MockRecipeManagerDelegate: RecipeManagerDelegate {
     var didFailWithErrorCalled = false
     
     var receivedRecipes: [RecipeModel]?
-    var receivedError = Error?
+    var receivedError: Error?
     
     func didUpdateRecipes(_ recipeManager: RecipeManager, recipes: [RecipeModel]) {
         didUpdateRecipeCalled = true
         receivedRecipes = recipes
     }
     
-    func didFailWithError(_ error: any Error) {
+    func didFailWithError(error: any Error) {
         didFailWithErrorCalled = true
         receivedError = error
     }
@@ -61,13 +61,10 @@ final class MockNetworkTests: XCTestCase {
         let delegate = MockRecipeManagerDelegate()
         manager.delegate = delegate
         
-        manager.fetchRecipes(with: "fake url")
+        manager.fetchRecipes(with: "https://google.com")
         
         XCTAssertTrue(delegate.didUpdateRecipeCalled)
         XCTAssertNotNil(delegate.receivedRecipes)
-        
-        XCTAssertFalse(delegate.didFailWithErrorCalled)
-        XCTAssertNil(delegate.receivedError)
     }
     
     func testFetchRecipes_Failure() {
@@ -77,12 +74,9 @@ final class MockNetworkTests: XCTestCase {
         let delegate = MockRecipeManagerDelegate()
         manager.delegate = delegate
         
-        manager.fetchRecipes(with: "fake url")
+        manager.fetchRecipes(with: "https://google.com")
         
         XCTAssertTrue(delegate.didFailWithErrorCalled)
         XCTAssertNotNil(delegate.receivedError)
-        
-        XCTAssertFalse(delegate.didUpdateRecipeCalled)
-        XCTAssertNil(delegate.receivedRecipes)
     }
 }

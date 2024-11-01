@@ -10,10 +10,52 @@ import UIKit
 class ListViewController: UIViewController {
     
     var recipeManager = RecipeManager()
+    
+    var recipes: [RecipeModel] = []
+    var collectionView: UICollectionView!
+    var emptyView: EmptyListView!
+    
+    var isFirstLoaded = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        recipeManager.delegate = self
+        
+        // navigation bar
+        self.title = "Taste"
+        view.backgroundColor = backgroundColor
+        navigationController?.navigationBar.backgroundColor = navigationBarColor
+        navigationController?.navigationBar.tintColor = navigationBarButtonColor
+        
+        let malformedButton = UIBarButtonItem(image: UIImage(systemName: "exclamationmark.circle"), style: .plain, target: self, action: #selector(malformedButtonTapped))
+        let emptyButton = UIBarButtonItem(image: UIImage(systemName: "circle.dashed"), style: .plain, target: self, action: #selector(emptyButtonTapped))
+        let sortButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), style: .plain, target: self, action: #selector(sortButtonTapped))
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshButtonTapped))
+        
+        
+        navigationItem.leftBarButtonItems = [malformedButton, emptyButton]
+        navigationItem.rightBarButtonItems = [refreshButton, sortButton]
+        
+        // empty view
+        emptyView = EmptyListView(frame: self.view.bounds)
+        view.addSubview(emptyView)
+        
+        // collection view
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width, height: collectionCellHeight)
+        layout.minimumLineSpacing = collectionMinLineSpacing
+        layout.minimumInteritemSpacing = collectionMinInteritemSpacing
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.reuseIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = collectionBackgroundColor
+        view.addSubview(collectionView)
+        
+        // load recipes
+//        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
+        recipeManager.fetchEmployees_local("valid")
     }
 
 

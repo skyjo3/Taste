@@ -12,6 +12,6 @@ class ErrorAlertController: UIAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.addAction(UIAlertAction(title: "Got it!", style: .default))
     }
 }

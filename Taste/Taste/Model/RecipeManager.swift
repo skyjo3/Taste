@@ -75,3 +75,20 @@ struct RecipeManager {
         }
     }
 }
+
+extension RecipeManager {
+    func fetchRecipes_local (_ filename: String) {
+        guard let url = Bundle.main.url(forResource: filename, withExtension: "json") else {
+            let error = NSError(domain: "", code: 100, userInfo: [NSLocalizedDescriptionKey: "Cannot find any JSON file."])
+            delegate?.didFailWithError(error: error)
+            return
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            let results = parseJSON(data)
+            delegate?.didUpdateRecipes(self, employees: results)
+        } catch {
+            delegate?.didFailWithError(error: error)
+        }
+    }
+}

@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		214C45D9A34A4C741146C3B6 /* Pods_TasteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 521F4317155D9A8BC8B40301 /* Pods_TasteTests.framework */; };
+		7FC273150179400F0563893E /* Pods_Taste.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D763B90592A85F5CD7E15B28 /* Pods_Taste.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E19C393C2CD4372E00E37EB4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -17,6 +22,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44336740541504894B93ED90 /* Pods-TasteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TasteTests.release.xcconfig"; path = "Target Support Files/Pods-TasteTests/Pods-TasteTests.release.xcconfig"; sourceTree = "<group>"; };
+		521F4317155D9A8BC8B40301 /* Pods_TasteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TasteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C2729625CF3AAB11EF08BBB /* Pods-Taste.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taste.debug.xcconfig"; path = "Target Support Files/Pods-Taste/Pods-Taste.debug.xcconfig"; sourceTree = "<group>"; };
+		694682C81A9D6390C497DFC8 /* Pods-Taste.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taste.release.xcconfig"; path = "Target Support Files/Pods-Taste/Pods-Taste.release.xcconfig"; sourceTree = "<group>"; };
+		947D80070E3D705DB99FEAA2 /* Pods-TasteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TasteTests.debug.xcconfig"; path = "Target Support Files/Pods-TasteTests/Pods-TasteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D763B90592A85F5CD7E15B28 /* Pods_Taste.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Taste.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E19C39252CD4372800E37EB4 /* Taste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taste.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E19C393B2CD4372E00E37EB4 /* TasteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TasteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -64,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FC273150179400F0563893E /* Pods_Taste.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,18 +83,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				214C45D9A34A4C741146C3B6 /* Pods_TasteTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07A9033C0D2F28132030FE15 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C2729625CF3AAB11EF08BBB /* Pods-Taste.debug.xcconfig */,
+				694682C81A9D6390C497DFC8 /* Pods-Taste.release.xcconfig */,
+				947D80070E3D705DB99FEAA2 /* Pods-TasteTests.debug.xcconfig */,
+				44336740541504894B93ED90 /* Pods-TasteTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B2A04126EE8EC099A727C659 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D763B90592A85F5CD7E15B28 /* Pods_Taste.framework */,
+				521F4317155D9A8BC8B40301 /* Pods_TasteTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E19C391C2CD4372800E37EB4 = {
 			isa = PBXGroup;
 			children = (
 				E19C39272CD4372800E37EB4 /* Taste */,
 				E19C393E2CD4372E00E37EB4 /* TasteTests */,
 				E19C39262CD4372800E37EB4 /* Products */,
+				07A9033C0D2F28132030FE15 /* Pods */,
+				B2A04126EE8EC099A727C659 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,9 +138,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E19C394E2CD4372E00E37EB4 /* Build configuration list for PBXNativeTarget "Taste" */;
 			buildPhases = (
+				1CC22E658D6F1651466DAE1C /* [CP] Check Pods Manifest.lock */,
 				E19C39212CD4372800E37EB4 /* Sources */,
 				E19C39222CD4372800E37EB4 /* Frameworks */,
 				E19C39232CD4372800E37EB4 /* Resources */,
+				1641CE7D2F883A69339A48C6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -114,8 +152,6 @@
 				E19C39272CD4372800E37EB4 /* Taste */,
 			);
 			name = Taste;
-			packageProductDependencies = (
-			);
 			productName = Taste;
 			productReference = E19C39252CD4372800E37EB4 /* Taste.app */;
 			productType = "com.apple.product-type.application";
@@ -124,6 +160,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E19C39532CD4372E00E37EB4 /* Build configuration list for PBXNativeTarget "TasteTests" */;
 			buildPhases = (
+				85E8BDB697DB050025925FEA /* [CP] Check Pods Manifest.lock */,
 				E19C39372CD4372E00E37EB4 /* Sources */,
 				E19C39382CD4372E00E37EB4 /* Frameworks */,
 				E19C39392CD4372E00E37EB4 /* Resources */,
@@ -137,8 +174,6 @@
 				E19C393E2CD4372E00E37EB4 /* TasteTests */,
 			);
 			name = TasteTests;
-			packageProductDependencies = (
-			);
 			productName = TasteTests;
 			productReference = E19C393B2CD4372E00E37EB4 /* TasteTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -199,6 +234,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1641CE7D2F883A69339A48C6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Taste/Pods-Taste-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Taste/Pods-Taste-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Taste/Pods-Taste-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1CC22E658D6F1651466DAE1C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Taste-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85E8BDB697DB050025925FEA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TasteTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E19C39212CD4372800E37EB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -227,6 +326,7 @@
 /* Begin XCBuildConfiguration section */
 		E19C394F2CD4372E00E37EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C2729625CF3AAB11EF08BBB /* Pods-Taste.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -259,6 +359,7 @@
 		};
 		E19C39502CD4372E00E37EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 694682C81A9D6390C497DFC8 /* Pods-Taste.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -398,7 +499,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -410,6 +511,7 @@
 		};
 		E19C39542CD4372E00E37EB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 947D80070E3D705DB99FEAA2 /* Pods-TasteTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -429,6 +531,7 @@
 		};
 		E19C39552CD4372E00E37EB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44336740541504894B93ED90 /* Pods-TasteTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

@@ -85,11 +85,13 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     @objc func videoButtonTapped(sender: URLButton) {
-        print(sender.url)
+        guard let url = sender.url else { return }
+        UIApplication.shared.open(url)
     }
     
     @objc func sourceButtonTapped(sender: URLButton) {
-        print(sender.url)
+        guard let url = sender.url else { return }
+        UIApplication.shared.open(url)
     }
 }
 

@@ -72,6 +72,13 @@ class ListViewController: UIViewController {
         recipeManager.fetchRecipes_local("empty")
     }
     @objc func sortButtonTapped() {
+        
+        if recipes.isEmpty {
+            let alert = ErrorAlertController(title: "No Recipes", message: "There is no recipe in the list right now. Sort it later!", preferredStyle: .alert)
+            self.present(alert, animated: true)
+            return
+        }
+        
         // group by cuisine, and sort sections by A-Z
         groupedRecipes = Dictionary(grouping: recipes, by: { $0.cuisine })
         cuisineTypes = groupedRecipes.keys.sorted()

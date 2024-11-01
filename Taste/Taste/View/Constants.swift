@@ -23,17 +23,17 @@ let navigationBarButtonColor = UIColor.black
 let collectionBackgroundColor = UIColor.clear
 let collectionMinLineSpacing = 10.0
 let collectionMinInteritemSpacing = 10.0
-let collectionCellHeight = 100.0
+let collectionCellHeight = cellImageHeight + cellTitleHeight + cellSubtitleHeight + cellButtonHeight
 
 // collection cell
-let cellPadding = 10.0
+let cellPadding = 20.0
 let cellImageWidth = 80.0
+let cellImageHeight = screenWidth*2/3
+let cellTitleHeight = 20.0
+let cellSubtitleHeight = 20.0
+let cellButtonHeight = 40.0
 
-let cellNumberWidth = 30.0
-let cellTypeImageWidth = 20.0
+let cellIconImageWidth = 20.0
 
 let cellTextXPosition = 100.0
-let cellTextWidth = screenSize.width - 100.0 - cellNumberWidth - cellTypeImageWidth
-
-let cellInfoHeight = 20.0
-let cellSubtleGap = 4.0
+let cellTextWidth = screenWidth

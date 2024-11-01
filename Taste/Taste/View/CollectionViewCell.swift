@@ -19,33 +19,33 @@ class CollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.width*2/3))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: cellImageHeight))
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
         self.addSubview(imageView)
         
-        titleLabel = UILabel(frame: CGRect(x: 0, y: 50, width: self.frame.width, height: 20))
+        titleLabel = UILabel(frame: CGRect(x: 0, y: cellImageHeight, width: screenWidth, height: cellTitleHeight))
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         self.addSubview(titleLabel)
         
-        subtitleLabel = UILabel(frame: CGRect(x: 0, y: 70, width: self.frame.width, height: 20))
+        subtitleLabel = UILabel(frame: CGRect(x: 0, y: cellImageHeight+cellTitleHeight, width: screenWidth, height: cellSubtitleHeight))
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         self.addSubview(subtitleLabel)
         
-        videoButton = UIButton(type: .system)
-        videoButton.frame = CGRect(x: 0, y: 90, width: self.frame.width/2, height: 40)
-        videoButton.titleLabel?.text = "Video"
+        videoButton = UIButton(frame: CGRect(x: 0, y: cellImageHeight+cellTitleHeight+cellSubtitleHeight, width: screenWidth/2, height: cellButtonHeight))
+        videoButton.setTitle("Video", for: .normal)
+        videoButton.tintColor = .black
+        videoButton.backgroundColor = .blue
         videoButton.addTarget(self, action: #selector(videoButtonTapped), for: .touchUpInside)
         self.addSubview(videoButton)
         
-        sourceButton = UIButton(type: .system)
-        sourceButton.frame = CGRect(x: 0, y: 90, width: self.frame.width/2, height: 40)
-        sourceButton.titleLabel?.text = "Source"
-        videoButton.addTarget(self, action: #selector(sourceButtonTapped), for: .touchUpInside)
+        sourceButton = UIButton(frame: CGRect(x: screenWidth/2, y: cellImageHeight+cellTitleHeight+cellSubtitleHeight, width: screenWidth/2, height: cellButtonHeight))
+        sourceButton.setTitle("Source", for: .normal)
+        sourceButton.tintColor = .black
+        sourceButton.backgroundColor = .green
+        sourceButton.addTarget(self, action: #selector(sourceButtonTapped), for: .touchUpInside)
         self.addSubview(sourceButton)
     }
     
@@ -59,7 +59,7 @@ class CollectionViewCell: UICollectionViewCell {
         subtitleLabel.text = recipe.cuisine
         
         if let imageURL = recipe.imageURL {
-            imageView.image = UIImage(named: "") // changed later
+            imageView.image = UIImage(systemName: "circle") // changed later
         }
         if let videoURL = recipe.videoURL {
             videoButton.userActivity?.webpageURL = URL(string: videoURL)

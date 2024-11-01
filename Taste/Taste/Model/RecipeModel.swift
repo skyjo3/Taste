@@ -8,5 +8,10 @@
 import Foundation
 
 struct RecipeModel {
+    let name: String
+    let cuisine: String
+    let imageURL: String
     
+    let videoURL: String
+    let sourceURL: String
 }

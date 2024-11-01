@@ -57,6 +57,25 @@ class ListViewController: UIViewController {
 //        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
         recipeManager.fetchEmployees_local("valid")
     }
+    
+    @objc func malformedButtonTapped() {
+//        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-malformed.json")
+        recipeManager.fetchEmployees_local("malformed")
+    }
+    @objc func emptyButtonTapped() {
+//        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes-empty.json")
+        recipeManager.fetchEmployees_local("empty")
+    }
+    @objc func sortButtonTapped() {
+        recipes.sort { $0.name < $1.name }
+        collectionView.reloadData()
+        let alert = ErrorAlertController(title: "Sorted", message: "The recipes are sorted by name in A-Z order now.", preferredStyle: .alert)
+        self.present(alert, animated: true)
+    }
+    @objc func refreshButtonTapped() {
+//        recipeManager.fetchEmployees(with: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")
+        recipeManager.fetchEmployees_local("valid")
+    }
 
 
 }

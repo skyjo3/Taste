@@ -56,7 +56,21 @@ final class MockNetworkTests: XCTestCase {
 
     func testFetchRecipes_Success() {
         let mockSession = MockURLSession()
-        mockSession.data = Data()
+        mockSession.data = """
+        {
+        "recipes": [
+        {
+        "cuisine": "Malaysian",
+        "name": "Apam Balik",
+        "photo_url_large": "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/large.jpg",
+        "photo_url_small": "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/small.jpg",
+        "source_url": "https://www.nyonyacooking.com/recipes/apam-balik~SJ5WuvsDf9WQ",
+        "uuid": "0c6ca6e7-e32a-4053-b824-1dbf749910d8",
+        "youtube_url": "https://www.youtube.com/watch?v=6R8ffRRJcrg"
+        }
+        ]
+        }
+        """.data(using: .utf8)
         var manager = RecipeManager(session: mockSession)
         let delegate = MockRecipeManagerDelegate()
         manager.delegate = delegate
@@ -67,7 +81,19 @@ final class MockNetworkTests: XCTestCase {
         XCTAssertNotNil(delegate.receivedRecipes)
     }
     
-    func testFetchRecipes_Failure() {
+    func testFetchRecipes_Failure_InvalidURL() {
+        let mockSession = MockURLSession()
+        var manager = RecipeManager(session: mockSession)
+        let delegate = MockRecipeManagerDelegate()
+        manager.delegate = delegate
+        
+        manager.fetchRecipes(with: "invalid_url")
+        
+        XCTAssertTrue(delegate.didFailWithErrorCalled)
+        XCTAssertEqual(delegate.receivedError?.localizedDescription, "The request does not return any data.")
+    }
+    
+    func testFetchRecipes_Failure_NetworkError() {
         let mockSession = MockURLSession()
         mockSession.error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Network Error"])
         var manager = RecipeManager(session: mockSession)
@@ -77,6 +103,23 @@ final class MockNetworkTests: XCTestCase {
         manager.fetchRecipes(with: "https://google.com")
         
         XCTAssertTrue(delegate.didFailWithErrorCalled)
-        XCTAssertNotNil(delegate.receivedError)
+        XCTAssertEqual(delegate.receivedError?.localizedDescription, "Network Error")
+    }
+    
+    func testFetchRecipes_Failure_NoData() {
+        let mockSession = MockURLSession()
+        mockSession.data = """
+        {
+        123
+        }
+        """.data(using: .utf8)
+        var manager = RecipeManager(session: mockSession)
+        let delegate = MockRecipeManagerDelegate()
+        manager.delegate = delegate
+        
+        manager.fetchRecipes(with: "https://google.com")
+        
+        XCTAssertTrue(delegate.didFailWithErrorCalled)
+        XCTAssertNotNil(delegate.receivedError?.localizedDescription, "The data couldn't be read because it isn't in the correct format.")
     }
 }

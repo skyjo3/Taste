@@ -8,8 +8,19 @@
 import UIKit
 import SDWebImage
 
+protocol ApplicationProtocol {
+    func open(_ url: URL, completionHandler: ((Bool) -> Void)?)
+}
+
+extension UIApplication: ApplicationProtocol {
+    func open(_ url: URL, completionHandler: ((Bool) -> Void)?) {
+        open(url)
+    }
+}
+
 class CollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "customCell"
+    public var application: ApplicationProtocol = UIApplication.shared
     
     private var containerView: UIView!
     
@@ -86,12 +97,12 @@ class CollectionViewCell: UICollectionViewCell {
     
     @objc func videoButtonTapped(sender: URLButton) {
         guard let url = sender.url else { return }
-        UIApplication.shared.open(url)
+        application.open(url, completionHandler: nil)
     }
     
     @objc func sourceButtonTapped(sender: URLButton) {
         guard let url = sender.url else { return }
-        UIApplication.shared.open(url)
+        application.open(url, completionHandler: nil)
     }
 }
 

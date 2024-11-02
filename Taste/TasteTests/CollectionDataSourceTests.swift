@@ -38,4 +38,43 @@ final class CollectionDataSourceTests: XCTestCase {
             XCTAssertEqual(cell.sourceButton.url, URL(string: sourceURL))
         }
     }
+    
+    func testCellVideoButtonTapped() {
+        let cell = CollectionViewCell()
+        let recipe = RecipeModel(name: "Sushi", cuisine: "Japanese", imageURL: "image.url", videoURL: "https://google.com", sourceURL: "source.url")
+        
+        cell.configure(with: recipe)
+        
+        let mockApplication = MockApplication()
+        cell.application = mockApplication
+        mockApplication.openURLHandler = { url in
+            XCTAssertEqual(url.absoluteString, "https://google.com")
+        }
+
+        cell.videoButton.sendActions(for: .touchUpInside)
+    }
+    
+    func testCellSourceButtonTapped() {
+        let cell = CollectionViewCell()
+        let recipe = RecipeModel(name: "Sushi", cuisine: "Japanese", imageURL: "image.url", videoURL: "video.url", sourceURL: "https://google.com")
+        
+        cell.configure(with: recipe)
+        
+        let mockApplication = MockApplication()
+        cell.application = mockApplication
+        mockApplication.openURLHandler = { url in
+            XCTAssertEqual(url.absoluteString, "https://google.com")
+        }
+
+        cell.sourceButton.sendActions(for: .touchUpInside)
+    }
+}
+
+class MockApplication: ApplicationProtocol {
+    var openURLHandler: ((URL) -> Void)?
+    
+    func open(_ url: URL, completionHandler: ((Bool) -> Void)?) {
+        openURLHandler?(url)
+        completionHandler?(true)
+    }
 }

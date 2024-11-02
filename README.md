@@ -12,7 +12,7 @@ Best View on Simulator: iPhone SE (2022, 3rd generation)
 
 $ cd < project directory >
 
-$ pod install
+No need to run $ pod install, as Pods/ is included in this repository.
 
 Please open the "Taste.xcworkspace" file for testing and editing.
 
